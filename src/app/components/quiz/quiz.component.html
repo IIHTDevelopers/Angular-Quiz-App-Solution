@@ -1,0 +1,42 @@
+<div class="quiz-container">
+    <h2>General Knowledge Quiz</h2>
+    <div class="question">
+        {{ questions[currentQuestionIndex].text }}
+    </div>
+    <div class="options">
+        <div *ngFor="let option of questions[currentQuestionIndex].options; let i = index">
+            <label>
+                <input type="radio" name="answer" [value]="i" (click)="selectAnswer(i)"
+                    [checked]="selectedAnswer === i" />
+                {{ option }}
+            </label>
+        </div>
+    </div>
+    <div class="controls">
+        <button (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">Previous</button>
+        <button (click)="nextQuestion()" [disabled]="currentQuestionIndex === questions.length - 1">Next</button>
+        <button (click)="submitQuiz()" [disabled]="currentQuestionIndex !== questions.length - 1">Submit</button>
+        <button (click)="resetQuiz()">Reset</button>
+    </div>
+    <div>
+        <button (click)="showAddQuestionForm()">Add Question</button>
+
+        <div *ngIf="addingQuestion" class="add-question-form">
+            <h3>Add New Question</h3>
+            <div>
+                <label for="newQuestionText">Question:</label>
+                <input type="text" id="newQuestionText" [(ngModel)]="newQuestion.text" />
+            </div>
+            <div *ngFor="let option of newQuestion.options; let i = index">
+                <label for="newOption{{ i }}">Option {{ i + 1 }}:</label>
+                <input type="text" [id]="'newOption' + i" [(ngModel)]="newQuestion.options[i]" />
+            </div>
+            <div>
+                <label for="newCorrectAnswer">Correct Answer (Index):</label>
+                <input type="number" id="newCorrectAnswer" [(ngModel)]="newQuestion.correctAnswer" />
+            </div>
+            <button (click)="addNewQuestion()" [disabled]="isAddButtonDisabled()" name="Add">Add</button>
+            <button (click)="cancelAddQuestionForm()">Cancel</button>
+        </div>
+    </div>
+</div>
