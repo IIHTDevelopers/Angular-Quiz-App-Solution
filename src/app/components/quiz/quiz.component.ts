@@ -7,7 +7,23 @@ import { Question } from '../../models/question.model';
   styleUrls: ['./quiz.component.css']
 })
 export class QuizComponent {
-  questions: Question[] = [];
+  questions: Question[] = [
+      {
+        text: 'What is the capital of France?',
+        options: ['Paris', 'Berlin', 'Madrid', 'Rome'],
+        correctAnswer: 0
+      },
+      {
+        text: 'Which planet is known as the Red Planet?',
+        options: ['Mars', 'Venus', 'Earth', 'Jupiter'],
+        correctAnswer: 0
+      },
+      {
+        text: 'What is the largest mammal?',
+        options: ['Elephant', 'Giraffe', 'Blue Whale', 'Lion'],
+        correctAnswer: 2
+      },
+    ];
   currentQuestionIndex: number = 0;
   selectedAnswer: number | null = null;
   score: number = 0;
@@ -18,9 +34,9 @@ export class QuizComponent {
     correctAnswer: 0
   };
 
-  constructor() {
-    this.loadQuestions();
-  }
+  // constructor() {
+  //   this.loadQuestions();
+  // }
 
   loadQuestions() {
     this.questions = [
